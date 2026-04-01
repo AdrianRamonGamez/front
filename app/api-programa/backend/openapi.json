@@ -1,0 +1,4981 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "base application",
+    "version": "1.0.0",
+    "description": "Proyecto API encargado de ser la parte Backend de la aplicación web base",
+    "contact": {
+      "name": "Alej0jr",
+      "email": "acaicedo@dynamizatic.com"
+    }
+  },
+  "paths": {
+    "/log-usuarios/count": {
+      "get": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "count",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LogUsuario model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "LogUsuario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<LogUsuario>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LogUsuarioController.count"
+      }
+    },
+    "/log-usuarios/{id}": {
+      "put": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "LogUsuario PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogUsuario"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "LogUsuarioController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "LogUsuario PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogUsuarioPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "LogUsuarioController.updateById"
+      },
+      "get": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "findById",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LogUsuario model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogUsuarioWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogUsuario.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LogUsuarioController.findById"
+      },
+      "delete": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "LogUsuario DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "LogUsuarioController.deleteById"
+      }
+    },
+    "/log-usuarios": {
+      "post": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "create",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LogUsuario model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogUsuario"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewLogUsuario"
+              }
+            }
+          }
+        },
+        "operationId": "LogUsuarioController.create"
+      },
+      "patch": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "LogUsuario PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "LogUsuario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<LogUsuario>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogUsuarioPartial"
+              }
+            }
+          }
+        },
+        "operationId": "LogUsuarioController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "LogUsuarioController",
+        "x-operation-name": "find",
+        "tags": [
+          "LogUsuarioController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of LogUsuario model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LogUsuarioWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogUsuario.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "LogUsuarioController.find"
+      }
+    },
+    "/obtenerUsuarioAvatar/{id}": {
+      "get": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "obtenerUsuarioAvatar",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve avatar del usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "UsuariosController.obtenerUsuarioAvatar"
+      }
+    },
+    "/permisos/count": {
+      "get": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "count",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Permiso count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Permiso.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Permiso>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "PermisoController.count"
+      }
+    },
+    "/permisos/matrix": {
+      "get": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "getMatrix",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of PermisoController.getMatrix"
+          }
+        },
+        "operationId": "PermisoController.getMatrix"
+      }
+    },
+    "/permisos/por-rol/{rolId}": {
+      "get": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "getPermisosPorRol",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of PermisoController.getPermisosPorRol"
+          }
+        },
+        "parameters": [
+          {
+            "name": "rolId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PermisoController.getPermisosPorRol"
+      }
+    },
+    "/permisos/{id}": {
+      "patch": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Permiso PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermisoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "PermisoController.updateById"
+      },
+      "delete": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Permiso DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "PermisoController.deleteById"
+      }
+    },
+    "/permisos": {
+      "post": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "create",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Permiso model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Permiso"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPermiso"
+              }
+            }
+          }
+        },
+        "operationId": "PermisoController.create"
+      },
+      "put": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "updateBulk",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Permisos update bulk success"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PermisoPartial"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "PermisoController.updateBulk"
+      },
+      "patch": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "updatePermisoMatrix",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Permiso actualizado desde matrix"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "modulo",
+                  "accion",
+                  "rolId",
+                  "permitido"
+                ],
+                "properties": {
+                  "modulo": {
+                    "type": "string"
+                  },
+                  "accion": {
+                    "type": "string"
+                  },
+                  "rolId": {
+                    "type": "number"
+                  },
+                  "permitido": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "PermisoController.updatePermisoMatrix"
+      },
+      "get": {
+        "x-controller-name": "PermisoController",
+        "x-operation-name": "find",
+        "tags": [
+          "PermisoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of PermisoController.find"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "rolId",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "PermisoController.find"
+      }
+    },
+    "/ping": {
+      "get": {
+        "x-controller-name": "PingController",
+        "x-operation-name": "ping",
+        "tags": [
+          "PingController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of PingController.ping"
+          }
+        },
+        "operationId": "PingController.ping"
+      }
+    },
+    "/refrescar-tokens/count": {
+      "get": {
+        "x-controller-name": "RefrescarTokenController",
+        "x-operation-name": "count",
+        "tags": [
+          "RefrescarTokenController"
+        ],
+        "responses": {
+          "200": {
+            "description": "RefrescarToken model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "RefrescarToken.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<RefrescarToken>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "RefrescarTokenController.count"
+      }
+    },
+    "/refrescar-tokens/{id}": {
+      "put": {
+        "x-controller-name": "RefrescarTokenController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "RefrescarTokenController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "RefrescarToken PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefrescarToken"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "RefrescarTokenController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "RefrescarTokenController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "RefrescarTokenController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "RefrescarToken PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefrescarTokenPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "RefrescarTokenController.updateById"
+      },
+      "get": {
+        "x-controller-name": "RefrescarTokenController",
+        "x-operation-name": "findById",
+        "tags": [
+          "RefrescarTokenController"
+        ],
+        "responses": {
+          "200": {
+            "description": "RefrescarToken model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefrescarTokenWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefrescarToken.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "RefrescarTokenController.findById"
+      },
+      "delete": {
+        "x-controller-name": "RefrescarTokenController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "RefrescarTokenController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "RefrescarToken DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "RefrescarTokenController.deleteById"
+      }
+    },
+    "/refrescar-tokens": {
+      "post": {
+        "x-controller-name": "RefrescarTokenController",
+        "x-operation-name": "create",
+        "tags": [
+          "RefrescarTokenController"
+        ],
+        "responses": {
+          "200": {
+            "description": "RefrescarToken model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefrescarToken"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewRefrescarToken"
+              }
+            }
+          }
+        },
+        "operationId": "RefrescarTokenController.create"
+      },
+      "patch": {
+        "x-controller-name": "RefrescarTokenController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "RefrescarTokenController"
+        ],
+        "responses": {
+          "200": {
+            "description": "RefrescarToken PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "RefrescarToken.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<RefrescarToken>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefrescarTokenPartial"
+              }
+            }
+          }
+        },
+        "operationId": "RefrescarTokenController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "RefrescarTokenController",
+        "x-operation-name": "find",
+        "tags": [
+          "RefrescarTokenController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of RefrescarToken model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RefrescarTokenWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefrescarToken.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "RefrescarTokenController.find"
+      }
+    },
+    "/rols/count": {
+      "get": {
+        "x-controller-name": "RolController",
+        "x-operation-name": "count",
+        "tags": [
+          "RolController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Rol model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Rol.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Rol>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "RolController.count"
+      }
+    },
+    "/rols/export/csv": {
+      "get": {
+        "x-controller-name": "RolController",
+        "x-operation-name": "exportCSV",
+        "tags": [
+          "RolController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Exporta roles en CSV",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "RolController.exportCSV"
+      }
+    },
+    "/rols/{id}": {
+      "put": {
+        "x-controller-name": "RolController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "RolController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Rol PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rol"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "RolController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "RolController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "RolController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Rol PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RolPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "RolController.updateById"
+      },
+      "delete": {
+        "x-controller-name": "RolController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "RolController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Rol DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "RolController.deleteById"
+      }
+    },
+    "/rols": {
+      "post": {
+        "x-controller-name": "RolController",
+        "x-operation-name": "create",
+        "tags": [
+          "RolController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Rol model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rol"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewRol"
+              }
+            }
+          }
+        },
+        "operationId": "RolController.create"
+      },
+      "get": {
+        "x-controller-name": "RolController",
+        "x-operation-name": "find",
+        "tags": [
+          "RolController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of RolController.find"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "RolController.find"
+      }
+    },
+    "/usuario-credenciales/count": {
+      "get": {
+        "x-controller-name": "UsuarioCredencialesController",
+        "x-operation-name": "count",
+        "tags": [
+          "UsuarioCredencialesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioCredenciales model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "UsuarioCredenciales.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<UsuarioCredenciales>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuarioCredencialesController.count"
+      }
+    },
+    "/usuario-credenciales/{id}": {
+      "put": {
+        "x-controller-name": "UsuarioCredencialesController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "UsuarioCredencialesController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioCredenciales PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioCredenciales"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UsuarioCredencialesController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "UsuarioCredencialesController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "UsuarioCredencialesController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioCredenciales PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioCredencialesPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UsuarioCredencialesController.updateById"
+      },
+      "get": {
+        "x-controller-name": "UsuarioCredencialesController",
+        "x-operation-name": "findById",
+        "tags": [
+          "UsuarioCredencialesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioCredenciales model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioCredencialesWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioCredenciales.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuarioCredencialesController.findById"
+      },
+      "delete": {
+        "x-controller-name": "UsuarioCredencialesController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "UsuarioCredencialesController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioCredenciales DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "UsuarioCredencialesController.deleteById"
+      }
+    },
+    "/usuario-credenciales": {
+      "post": {
+        "x-controller-name": "UsuarioCredencialesController",
+        "x-operation-name": "create",
+        "tags": [
+          "UsuarioCredencialesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioCredenciales model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioCredenciales"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUsuarioCredenciales"
+              }
+            }
+          }
+        },
+        "operationId": "UsuarioCredencialesController.create"
+      },
+      "patch": {
+        "x-controller-name": "UsuarioCredencialesController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "UsuarioCredencialesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioCredenciales PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "UsuarioCredenciales.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<UsuarioCredenciales>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioCredencialesPartial"
+              }
+            }
+          }
+        },
+        "operationId": "UsuarioCredencialesController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "UsuarioCredencialesController",
+        "x-operation-name": "find",
+        "tags": [
+          "UsuarioCredencialesController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of UsuarioCredenciales model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioCredencialesWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioCredenciales.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuarioCredencialesController.find"
+      }
+    },
+    "/usuario-password-historicos/count": {
+      "get": {
+        "x-controller-name": "UsuarioPasswordHistoricoController",
+        "x-operation-name": "count",
+        "tags": [
+          "UsuarioPasswordHistoricoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioPasswordHistorico model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "UsuarioPasswordHistorico.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<UsuarioPasswordHistorico>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuarioPasswordHistoricoController.count"
+      }
+    },
+    "/usuario-password-historicos/{id}": {
+      "put": {
+        "x-controller-name": "UsuarioPasswordHistoricoController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "UsuarioPasswordHistoricoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioPasswordHistorico PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioPasswordHistorico"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UsuarioPasswordHistoricoController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "UsuarioPasswordHistoricoController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "UsuarioPasswordHistoricoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioPasswordHistorico PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioPasswordHistoricoPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UsuarioPasswordHistoricoController.updateById"
+      },
+      "get": {
+        "x-controller-name": "UsuarioPasswordHistoricoController",
+        "x-operation-name": "findById",
+        "tags": [
+          "UsuarioPasswordHistoricoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioPasswordHistorico model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioPasswordHistoricoWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioPasswordHistorico.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuarioPasswordHistoricoController.findById"
+      },
+      "delete": {
+        "x-controller-name": "UsuarioPasswordHistoricoController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "UsuarioPasswordHistoricoController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioPasswordHistorico DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "UsuarioPasswordHistoricoController.deleteById"
+      }
+    },
+    "/usuario-password-historicos": {
+      "post": {
+        "x-controller-name": "UsuarioPasswordHistoricoController",
+        "x-operation-name": "create",
+        "tags": [
+          "UsuarioPasswordHistoricoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioPasswordHistorico model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioPasswordHistorico"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUsuarioPasswordHistorico"
+              }
+            }
+          }
+        },
+        "operationId": "UsuarioPasswordHistoricoController.create"
+      },
+      "patch": {
+        "x-controller-name": "UsuarioPasswordHistoricoController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "UsuarioPasswordHistoricoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioPasswordHistorico PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "UsuarioPasswordHistorico.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<UsuarioPasswordHistorico>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioPasswordHistoricoPartial"
+              }
+            }
+          }
+        },
+        "operationId": "UsuarioPasswordHistoricoController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "UsuarioPasswordHistoricoController",
+        "x-operation-name": "find",
+        "tags": [
+          "UsuarioPasswordHistoricoController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of UsuarioPasswordHistorico model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioPasswordHistoricoWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioPasswordHistorico.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuarioPasswordHistoricoController.find"
+      }
+    },
+    "/usuario-restablecer-passwords/count": {
+      "get": {
+        "x-controller-name": "UsuarioRestablecerPasswordController",
+        "x-operation-name": "count",
+        "tags": [
+          "UsuarioRestablecerPasswordController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioRestablecerPassword model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "UsuarioRestablecerPassword.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<UsuarioRestablecerPassword>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuarioRestablecerPasswordController.count"
+      }
+    },
+    "/usuario-restablecer-passwords/{id}": {
+      "put": {
+        "x-controller-name": "UsuarioRestablecerPasswordController",
+        "x-operation-name": "replaceById",
+        "tags": [
+          "UsuarioRestablecerPasswordController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioRestablecerPassword PUT success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRestablecerPassword"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UsuarioRestablecerPasswordController.replaceById"
+      },
+      "patch": {
+        "x-controller-name": "UsuarioRestablecerPasswordController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "UsuarioRestablecerPasswordController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioRestablecerPassword PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRestablecerPasswordPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UsuarioRestablecerPasswordController.updateById"
+      },
+      "get": {
+        "x-controller-name": "UsuarioRestablecerPasswordController",
+        "x-operation-name": "findById",
+        "tags": [
+          "UsuarioRestablecerPasswordController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioRestablecerPassword model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioRestablecerPasswordWithRelations"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioRestablecerPassword.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuarioRestablecerPasswordController.findById"
+      },
+      "delete": {
+        "x-controller-name": "UsuarioRestablecerPasswordController",
+        "x-operation-name": "deleteById",
+        "tags": [
+          "UsuarioRestablecerPasswordController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioRestablecerPassword DELETE success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "UsuarioRestablecerPasswordController.deleteById"
+      }
+    },
+    "/usuario-restablecer-passwords": {
+      "post": {
+        "x-controller-name": "UsuarioRestablecerPasswordController",
+        "x-operation-name": "create",
+        "tags": [
+          "UsuarioRestablecerPasswordController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioRestablecerPassword model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioRestablecerPassword"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUsuarioRestablecerPassword"
+              }
+            }
+          }
+        },
+        "operationId": "UsuarioRestablecerPasswordController.create"
+      },
+      "patch": {
+        "x-controller-name": "UsuarioRestablecerPasswordController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "UsuarioRestablecerPasswordController"
+        ],
+        "responses": {
+          "200": {
+            "description": "UsuarioRestablecerPassword PATCH success count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "UsuarioRestablecerPassword.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<UsuarioRestablecerPassword>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRestablecerPasswordPartial"
+              }
+            }
+          }
+        },
+        "operationId": "UsuarioRestablecerPasswordController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "UsuarioRestablecerPasswordController",
+        "x-operation-name": "find",
+        "tags": [
+          "UsuarioRestablecerPasswordController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of UsuarioRestablecerPassword model instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioRestablecerPasswordWithRelations"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioRestablecerPassword.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuarioRestablecerPasswordController.find"
+      }
+    },
+    "/usuarioCredenciales/{idUsuario}": {
+      "patch": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "updateByIdCredenciales",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "UsuarioCredenciales PATCH success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioCredencialesPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UsuariosController.updateByIdCredenciales"
+      }
+    },
+    "/usuarios/count": {
+      "get": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "count",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario model count",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loopback.Count"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Usuario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Usuario>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuariosController.count"
+      }
+    },
+    "/usuarios/count-by-rol/{rolId}": {
+      "get": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "countByRol",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Cantidad de usuarios con ese rol",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "rolId",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "UsuariosController.countByRol"
+      }
+    },
+    "/usuarios/export-csv": {
+      "get": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "exportCSV",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Exporta usuarios en CSV",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "rows",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuariosController.exportCSV"
+      }
+    },
+    "/usuarios/login": {
+      "post": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "login",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Login de usuario con JWT",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string"
+                    },
+                    "expiresIn": {
+                      "type": "string"
+                    },
+                    "refreshToken": {
+                      "type": "string"
+                    },
+                    "userData": {
+                      "$ref": "#/components/schemas/Usuario"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "mail",
+                  "password"
+                ],
+                "properties": {
+                  "mail": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "Funcion de Login",
+          "required": true
+        },
+        "operationId": "UsuariosController.login"
+      }
+    },
+    "/usuarios/new-password": {
+      "post": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "newPassword",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of UsuariosController.newPassword"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token",
+                  "password"
+                ],
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "UsuariosController.newPassword"
+      }
+    },
+    "/usuarios/register": {
+      "post": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "register",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "User modelo instancia",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "mail",
+                  "password",
+                  "nombre",
+                  "rolId"
+                ],
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "mail": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "rolId": {
+                    "type": "number"
+                  },
+                  "activoSn": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "registro del perfil de usuario"
+        },
+        "operationId": "UsuariosController.register"
+      }
+    },
+    "/usuarios/reset-password": {
+      "post": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "resetPassword",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of UsuariosController.resetPassword"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "UsuariosController.resetPassword"
+      }
+    },
+    "/usuarios/{id}": {
+      "patch": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "updateById",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of UsuariosController.updateById"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioPartial"
+              }
+            }
+          },
+          "x-parameter-index": 1
+        },
+        "operationId": "UsuariosController.updateById"
+      },
+      "get": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "findById",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of UsuariosController.findById"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario.Filter"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuariosController.findById"
+      },
+      "delete": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "deleteUsuario",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of UsuariosController.deleteUsuario"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "operationId": "UsuariosController.deleteUsuario"
+      }
+    },
+    "/usuarios": {
+      "post": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "create",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario model instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUsuario"
+              }
+            }
+          }
+        },
+        "operationId": "UsuariosController.create"
+      },
+      "patch": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "updateAll",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of UsuariosController.updateAll"
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Usuario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Usuario>"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioPartial"
+              }
+            }
+          }
+        },
+        "operationId": "UsuariosController.updateAll"
+      },
+      "get": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "find",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return value of UsuariosController.find"
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuariosController.find"
+      }
+    },
+    "/vistaEmpresaRolUsuario": {
+      "get": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "vistaEmpresaRolUsuario",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve usuarios y su rol con la empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario.Filter1"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuariosController.vistaEmpresaRolUsuario"
+      }
+    },
+    "/vistaEmpresaRolUsuarioCount": {
+      "get": {
+        "x-controller-name": "UsuariosController",
+        "x-operation-name": "vistaEmpresaRolUsuarioCount",
+        "tags": [
+          "UsuariosController"
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve usuarios y su rol con la empresa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "where",
+            "in": "query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Usuario.WhereFilter",
+                  "additionalProperties": true,
+                  "x-typescript-type": "@loopback/repository#Where<Usuario>"
+                }
+              }
+            }
+          }
+        ],
+        "operationId": "UsuariosController.vistaEmpresaRolUsuarioCount"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Usuario": {
+        "title": "Usuario",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "rolId": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellidos": {
+            "type": "string"
+          },
+          "movil": {
+            "type": "string"
+          },
+          "mail": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "fecha_creacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha_modificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewUsuario": {
+        "title": "NewUsuario",
+        "type": "object",
+        "description": "(tsType: Omit<Usuario, 'id'>, schemaOptions: { title: 'NewUsuario', exclude: [ 'id' ] })",
+        "properties": {
+          "rolId": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellidos": {
+            "type": "string"
+          },
+          "movil": {
+            "type": "string"
+          },
+          "mail": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "fecha_creacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha_modificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Usuario, 'id'>"
+      },
+      "UsuarioPartial": {
+        "title": "UsuarioPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Usuario>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "rolId": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellidos": {
+            "type": "string"
+          },
+          "movil": {
+            "type": "string"
+          },
+          "mail": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "fecha_creacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha_modificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuCreacion": {
+            "type": "number"
+          },
+          "usuModificacion": {
+            "type": "number"
+          },
+          "fechaInactivo": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Usuario>"
+      },
+      "UsuarioCredencialesPartial": {
+        "title": "UsuarioCredencialesPartial",
+        "type": "object",
+        "description": "(tsType: Partial<UsuarioCredenciales>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "password": {
+            "type": "string",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<UsuarioCredenciales>"
+      },
+      "UsuarioCredenciales": {
+        "title": "UsuarioCredenciales",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "password": {
+            "type": "string",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "password"
+        ],
+        "additionalProperties": false
+      },
+      "UsuarioRestablecerPassword": {
+        "title": "UsuarioRestablecerPassword",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "email": {
+            "type": "string"
+          },
+          "codigoRecuperacion": {
+            "type": "string"
+          },
+          "expiraEn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewUsuarioRestablecerPassword": {
+        "title": "NewUsuarioRestablecerPassword",
+        "type": "object",
+        "description": "(tsType: Omit<UsuarioRestablecerPassword, 'id'>, schemaOptions: { title: 'NewUsuarioRestablecerPassword', exclude: [ 'id' ] })",
+        "properties": {
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "email": {
+            "type": "string"
+          },
+          "codigoRecuperacion": {
+            "type": "string"
+          },
+          "expiraEn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<UsuarioRestablecerPassword, 'id'>"
+      },
+      "UsuarioRestablecerPasswordWithRelations": {
+        "title": "UsuarioRestablecerPasswordWithRelations",
+        "type": "object",
+        "description": "(tsType: UsuarioRestablecerPasswordWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "email": {
+            "type": "string"
+          },
+          "codigoRecuperacion": {
+            "type": "string"
+          },
+          "expiraEn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "UsuarioRestablecerPasswordWithRelations"
+      },
+      "UsuarioRestablecerPasswordPartial": {
+        "title": "UsuarioRestablecerPasswordPartial",
+        "type": "object",
+        "description": "(tsType: Partial<UsuarioRestablecerPassword>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "email": {
+            "type": "string"
+          },
+          "codigoRecuperacion": {
+            "type": "string"
+          },
+          "expiraEn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<UsuarioRestablecerPassword>"
+      },
+      "UsuarioPasswordHistorico": {
+        "title": "UsuarioPasswordHistorico",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuarioId"
+        ],
+        "additionalProperties": false
+      },
+      "NewUsuarioPasswordHistorico": {
+        "title": "NewUsuarioPasswordHistorico",
+        "type": "object",
+        "description": "(tsType: Omit<UsuarioPasswordHistorico, 'id'>, schemaOptions: { title: 'NewUsuarioPasswordHistorico', exclude: [ 'id' ] })",
+        "properties": {
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuarioId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<UsuarioPasswordHistorico, 'id'>"
+      },
+      "UsuarioPasswordHistoricoWithRelations": {
+        "title": "UsuarioPasswordHistoricoWithRelations",
+        "type": "object",
+        "description": "(tsType: UsuarioPasswordHistoricoWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "usuarioId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "UsuarioPasswordHistoricoWithRelations"
+      },
+      "UsuarioPasswordHistoricoPartial": {
+        "title": "UsuarioPasswordHistoricoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<UsuarioPasswordHistorico>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": false
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<UsuarioPasswordHistorico>"
+      },
+      "NewUsuarioCredenciales": {
+        "title": "NewUsuarioCredenciales",
+        "type": "object",
+        "description": "(tsType: Omit<UsuarioCredenciales, 'id'>, schemaOptions: { title: 'NewUsuarioCredenciales', exclude: [ 'id' ] })",
+        "properties": {
+          "password": {
+            "type": "string",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "password"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<UsuarioCredenciales, 'id'>"
+      },
+      "UsuarioCredencialesWithRelations": {
+        "title": "UsuarioCredencialesWithRelations",
+        "type": "object",
+        "description": "(tsType: UsuarioCredencialesWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "password": {
+            "type": "string",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "password"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "UsuarioCredencialesWithRelations"
+      },
+      "Rol": {
+        "title": "Rol",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false
+      },
+      "NewRol": {
+        "title": "NewRol",
+        "type": "object",
+        "description": "(tsType: Omit<Rol, 'id'>, schemaOptions: { title: 'NewRol', exclude: [ 'id' ] })",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Rol, 'id'>"
+      },
+      "RolPartial": {
+        "title": "RolPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Rol>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "activoSn": {
+            "type": "string"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioCreacion": {
+            "type": "number"
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuarioModificacion": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Rol>"
+      },
+      "RefrescarToken": {
+        "title": "RefrescarToken",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewRefrescarToken": {
+        "title": "NewRefrescarToken",
+        "type": "object",
+        "description": "(tsType: Omit<RefrescarToken, 'id'>, schemaOptions: { title: 'NewRefrescarToken', exclude: [ 'id' ] })",
+        "properties": {
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<RefrescarToken, 'id'>"
+      },
+      "RefrescarTokenWithRelations": {
+        "title": "RefrescarTokenWithRelations",
+        "type": "object",
+        "description": "(tsType: RefrescarTokenWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "RefrescarTokenWithRelations"
+      },
+      "RefrescarTokenPartial": {
+        "title": "RefrescarTokenPartial",
+        "type": "object",
+        "description": "(tsType: Partial<RefrescarToken>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "usuarioId": {
+            "type": "number",
+            "nullable": true
+          },
+          "refreshToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<RefrescarToken>"
+      },
+      "Permiso": {
+        "title": "Permiso",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "pantalla": {
+            "type": "string"
+          },
+          "accion": {
+            "type": "string"
+          },
+          "permisoSn": {
+            "type": "string"
+          },
+          "rolId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "pantalla",
+          "accion",
+          "rolId"
+        ],
+        "additionalProperties": false
+      },
+      "NewPermiso": {
+        "title": "NewPermiso",
+        "type": "object",
+        "description": "(tsType: Omit<Permiso, 'id'>, schemaOptions: { title: 'NewPermiso', exclude: [ 'id' ] })",
+        "properties": {
+          "pantalla": {
+            "type": "string"
+          },
+          "accion": {
+            "type": "string"
+          },
+          "permisoSn": {
+            "type": "string"
+          },
+          "rolId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "pantalla",
+          "accion",
+          "rolId"
+        ],
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<Permiso, 'id'>"
+      },
+      "PermisoPartial": {
+        "title": "PermisoPartial",
+        "type": "object",
+        "description": "(tsType: Partial<Permiso>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "pantalla": {
+            "type": "string"
+          },
+          "accion": {
+            "type": "string"
+          },
+          "permisoSn": {
+            "type": "string"
+          },
+          "rolId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<Permiso>"
+      },
+      "LogUsuario": {
+        "title": "LogUsuario",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "masDatos": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewLogUsuario": {
+        "title": "NewLogUsuario",
+        "type": "object",
+        "description": "(tsType: Omit<LogUsuario, 'id'>, schemaOptions: { title: 'NewLogUsuario', exclude: [ 'id' ] })",
+        "properties": {
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "masDatos": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Omit<LogUsuario, 'id'>"
+      },
+      "LogUsuarioWithRelations": {
+        "title": "LogUsuarioWithRelations",
+        "type": "object",
+        "description": "(tsType: LogUsuarioWithRelations, schemaOptions: { includeRelations: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "masDatos": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "LogUsuarioWithRelations"
+      },
+      "LogUsuarioPartial": {
+        "title": "LogUsuarioPartial",
+        "type": "object",
+        "description": "(tsType: Partial<LogUsuario>, schemaOptions: { partial: true })",
+        "properties": {
+          "id": {
+            "type": "number",
+            "nullable": false
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "masDatos": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "usuCreacion": {
+            "type": "number",
+            "nullable": true
+          },
+          "usuModificacion": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "Partial<LogUsuario>"
+      },
+      "loopback.Count": {
+        "type": "object",
+        "title": "loopback.Count",
+        "x-typescript-type": "@loopback/repository#Count",
+        "properties": {
+          "count": {
+            "type": "number"
+          }
+        }
+      },
+      "LogUsuario.Filter": {
+        "type": "object",
+        "title": "LogUsuario.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "ip": {
+                    "type": "boolean"
+                  },
+                  "masDatos": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "ip",
+                    "masDatos",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "LogUsuario.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<LogUsuario>"
+      },
+      "LogUsuario.Filter1": {
+        "type": "object",
+        "title": "LogUsuario.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "LogUsuario.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "ip": {
+                    "type": "boolean"
+                  },
+                  "masDatos": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "ip",
+                    "masDatos",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "LogUsuario.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<LogUsuario>"
+      },
+      "RefrescarToken.Filter": {
+        "type": "object",
+        "title": "RefrescarToken.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "refreshToken": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "usuarioId",
+                    "refreshToken"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "RefrescarToken.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<RefrescarToken>"
+      },
+      "RefrescarToken.Filter1": {
+        "type": "object",
+        "title": "RefrescarToken.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "RefrescarToken.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "refreshToken": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "usuarioId",
+                    "refreshToken"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "RefrescarToken.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<RefrescarToken>"
+      },
+      "UsuarioCredenciales.Filter": {
+        "type": "object",
+        "title": "UsuarioCredenciales.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "password",
+                    "usuarioId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "UsuarioCredenciales.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<UsuarioCredenciales>"
+      },
+      "UsuarioCredenciales.Filter1": {
+        "type": "object",
+        "title": "UsuarioCredenciales.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "UsuarioCredenciales.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "password",
+                    "usuarioId"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "UsuarioCredenciales.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<UsuarioCredenciales>"
+      },
+      "UsuarioPasswordHistorico.Filter": {
+        "type": "object",
+        "title": "UsuarioPasswordHistorico.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaFin": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "usuarioId",
+                    "password",
+                    "fechaInicio",
+                    "fechaFin",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "UsuarioPasswordHistorico.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<UsuarioPasswordHistorico>"
+      },
+      "UsuarioPasswordHistorico.Filter1": {
+        "type": "object",
+        "title": "UsuarioPasswordHistorico.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "UsuarioPasswordHistorico.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "password": {
+                    "type": "boolean"
+                  },
+                  "fechaInicio": {
+                    "type": "boolean"
+                  },
+                  "fechaFin": {
+                    "type": "boolean"
+                  },
+                  "fechaCreacion": {
+                    "type": "boolean"
+                  },
+                  "fechaModificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "usuarioId",
+                    "password",
+                    "fechaInicio",
+                    "fechaFin",
+                    "fechaCreacion",
+                    "fechaModificacion",
+                    "usuCreacion",
+                    "usuModificacion"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "UsuarioPasswordHistorico.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<UsuarioPasswordHistorico>"
+      },
+      "UsuarioRestablecerPassword.Filter": {
+        "type": "object",
+        "title": "UsuarioRestablecerPassword.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "codigoRecuperacion": {
+                    "type": "boolean"
+                  },
+                  "expiraEn": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "usuarioId",
+                    "email",
+                    "codigoRecuperacion",
+                    "expiraEn"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "UsuarioRestablecerPassword.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<UsuarioRestablecerPassword>"
+      },
+      "UsuarioRestablecerPassword.Filter1": {
+        "type": "object",
+        "title": "UsuarioRestablecerPassword.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "UsuarioRestablecerPassword.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "usuarioId": {
+                    "type": "boolean"
+                  },
+                  "email": {
+                    "type": "boolean"
+                  },
+                  "codigoRecuperacion": {
+                    "type": "boolean"
+                  },
+                  "expiraEn": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "usuarioId",
+                    "email",
+                    "codigoRecuperacion",
+                    "expiraEn"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "UsuarioRestablecerPassword.Fields"
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<UsuarioRestablecerPassword>"
+      },
+      "Usuario.ScopeFilter": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": true
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            ]
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false,
+        "title": "Usuario.ScopeFilter"
+      },
+      "Usuario.IncludeFilter.Items": {
+        "title": "Usuario.IncludeFilter.Items",
+        "type": "object",
+        "properties": {
+          "relation": {
+            "type": "string",
+            "enum": [
+              "rol",
+              "userCredentials"
+            ]
+          },
+          "scope": {
+            "$ref": "#/components/schemas/Usuario.ScopeFilter"
+          }
+        }
+      },
+      "Usuario.Filter": {
+        "type": "object",
+        "title": "Usuario.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "rolId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "apellidos": {
+                    "type": "boolean"
+                  },
+                  "movil": {
+                    "type": "boolean"
+                  },
+                  "mail": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "telefono": {
+                    "type": "boolean"
+                  },
+                  "avatar": {
+                    "type": "boolean"
+                  },
+                  "fecha_creacion": {
+                    "type": "boolean"
+                  },
+                  "fecha_modificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "rolId",
+                    "nombre",
+                    "apellidos",
+                    "movil",
+                    "mail",
+                    "activoSn",
+                    "telefono",
+                    "avatar",
+                    "fecha_creacion",
+                    "fecha_modificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Usuario.Fields"
+          },
+          "include": {
+            "title": "Usuario.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Usuario.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Usuario>"
+      },
+      "Usuario.Filter1": {
+        "type": "object",
+        "title": "Usuario.Filter",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "example": 100
+          },
+          "skip": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "order": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "where": {
+            "title": "Usuario.WhereFilter",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "fields": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "boolean"
+                  },
+                  "rolId": {
+                    "type": "boolean"
+                  },
+                  "nombre": {
+                    "type": "boolean"
+                  },
+                  "apellidos": {
+                    "type": "boolean"
+                  },
+                  "movil": {
+                    "type": "boolean"
+                  },
+                  "mail": {
+                    "type": "boolean"
+                  },
+                  "activoSn": {
+                    "type": "boolean"
+                  },
+                  "telefono": {
+                    "type": "boolean"
+                  },
+                  "avatar": {
+                    "type": "boolean"
+                  },
+                  "fecha_creacion": {
+                    "type": "boolean"
+                  },
+                  "fecha_modificacion": {
+                    "type": "boolean"
+                  },
+                  "usuCreacion": {
+                    "type": "boolean"
+                  },
+                  "usuModificacion": {
+                    "type": "boolean"
+                  },
+                  "fechaInactivo": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "id",
+                    "rolId",
+                    "nombre",
+                    "apellidos",
+                    "movil",
+                    "mail",
+                    "activoSn",
+                    "telefono",
+                    "avatar",
+                    "fecha_creacion",
+                    "fecha_modificacion",
+                    "usuCreacion",
+                    "usuModificacion",
+                    "fechaInactivo"
+                  ],
+                  "example": "id"
+                },
+                "uniqueItems": true
+              }
+            ],
+            "title": "Usuario.Fields"
+          },
+          "include": {
+            "title": "Usuario.IncludeFilter",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Usuario.IncludeFilter.Items"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "x-typescript-type": "@loopback/repository#Filter<Usuario>"
+      }
+    }
+  },
+  "security": [
+    {
+      "jwt": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://[::1]:8000"
+    }
+  ]
+}

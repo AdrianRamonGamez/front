@@ -22,6 +22,11 @@ const AppMenu = () => {
                     icon: "pi pi-fw pi-lock",
                     to: "/admin/permisos",
                 },
+                {
+                    label: "Roles",
+                    icon: "pi pi-fw pi-users",
+                    to: "/admin/roless",
+                }
             ],
         },
     ];
