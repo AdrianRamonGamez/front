@@ -1,0 +1,220 @@
+.container {
+    padding: 1.5rem 2rem;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.header {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+}
+
+.toolbar {
+    margin-bottom: 1.5rem;
+    background-color: white !important;
+    border-radius: 6px;
+    padding: 1rem !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.toolbar :global(.p-toolbar-group-left),
+.toolbar :global(.p-toolbar-group-right) {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.searchContainer {
+    margin-bottom: 1.5rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.95rem;
+    border: 1px solid #e0e6ed;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #db4a6f;
+    box-shadow: 0 0 0 3px rgba(219, 74, 111, 0.1);
+}
+
+.tableContainer {
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid #e0e6ed;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.tableContainer :global(.p-datatable) {
+    border: none;
+}
+
+.tableContainer :global(.p-datatable .p-datatable-thead > tr > th) {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e0e6ed;
+    padding: 1rem;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.tableContainer :global(.p-datatable .p-datatable-tbody > tr > td) {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid #e0e6ed;
+    color: #555;
+    vertical-align: top;
+
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tableContainer :global(.p-datatable .p-datatable-tbody > tr:hover) {
+    background-color: #f8f9fa;
+}
+
+.pagination {
+    background-color: white;
+    border: 1px solid #e0e6ed;
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.pagination :global(.p-paginator) {
+    padding: 0;
+    background: transparent;
+    border: none;
+    justify-content: flex-end;
+}
+
+.cellWithActions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.actions :global(.p-button) {
+    width: 36px;
+    height: 36px;
+}
+
+/* Colores personalizados */
+.actions :global(.p-button-info) {
+    background-color: #4a90ff !important;
+    border-color: #4a90ff !important;
+}
+
+.actions :global(.p-button-info:hover) {
+    background-color: #3a7fe5 !important;
+}
+
+.actions :global(.p-button-success) {
+    background-color: #2dc96e !important;
+    border-color: #2dc96e !important;
+}
+
+.actions :global(.p-button-success:hover) {
+    background-color: #23a955 !important;
+}
+
+.actions :global(.p-button-warning) {
+    background-color: #ffa940 !important;
+    border-color: #ffa940 !important;
+}
+
+.actions :global(.p-button-warning:hover) {
+    background-color: #ff9500 !important;
+}
+
+.sortedColumn {
+    color: #e91e63;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+}
+
+.headerCell {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+
+.filterIcon {
+    font-size: 0.75rem;
+    color: #999;
+    cursor: pointer;
+}
+
+.filterIcon:hover {
+    color: #e91e63;
+}
+
+.filterPopup {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    background: white;
+    border: 1px solid #e0e6ed;
+    padding: 0.75rem;
+    border-radius: 6px;
+    z-index: 1000;
+    width: 200px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.filterPopup :global(.p-inputtext) {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.filterActions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}

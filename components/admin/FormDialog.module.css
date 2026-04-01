@@ -1,0 +1,149 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.required {
+    color: #db4a6f;
+    margin-left: 0.25rem;
+    font-weight: bold;
+}
+
+/* Inputs base */
+.formGroup input,
+.formGroup textarea,
+.formGroup .p-dropdown,
+.formGroup .p-inputswitch,
+.formGroup .p-calendar {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    border: 1px solid #e0e6ed;
+    border-radius: 4px;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Inputs ocupan todo el ancho */
+.formGroup input,
+.formGroup textarea {
+    width: 100%;
+}
+
+/* Focus normal */
+.formGroup input:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: #db4a6f;
+    box-shadow: 0 0 0 3px rgba(219, 74, 111, 0.1);
+}
+
+/* ===== ERROR STATE ===== */
+
+/* INPUT TEXT */
+.formGroup input.p-invalid {
+    border: 1px solid #ef4444 !important;
+}
+
+/* TEXTAREA */
+.formGroup textarea.p-invalid {
+    border: 1px solid #ef4444 !important;
+}
+
+/* DROPDOWN */
+.formGroup .p-dropdown.p-invalid {
+    border: 1px solid #ef4444 !important;
+}
+
+/* CALENDAR */
+.formGroup .p-calendar.p-invalid {
+    border: 1px solid #ef4444 !important;
+}
+
+/* PASSWORD (wrapper) */
+.formGroup .p-password.p-invalid .p-inputtext {
+    border: 1px solid #ef4444 !important;
+}
+
+/* FOCUS con error */
+.formGroup input.p-invalid:focus,
+.formGroup textarea.p-invalid:focus,
+.formGroup .p-dropdown.p-invalid:focus,
+.formGroup .p-calendar.p-invalid:focus {
+    box-shadow: 0 0 0 1px #ef4444 !important;
+}
+
+/* Mensajes de error */
+.error {
+    color: #f5222d;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.helper {
+    color: #8c8c8c;
+    font-size: 0.85rem;
+    display: block;
+}
+
+/* Botones */
+.buttonContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e6ed;
+}
+
+.buttonContainer button {
+    min-width: 100px;
+}
+
+/* Inline */
+.inlineContainer {
+    padding: 20px;
+}
+
+.inlineHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .formContainer {
+        gap: 1rem;
+    }
+
+    .formGroup input,
+    .formGroup textarea,
+    .formGroup .p-dropdown {
+        font-size: 1rem;
+    }
+
+    .buttonContainer {
+        flex-direction: column;
+    }
+
+    .buttonContainer button {
+        width: 100%;
+    }
+}
