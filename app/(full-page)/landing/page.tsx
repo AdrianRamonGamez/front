@@ -14,7 +14,6 @@ const LandingPage: Page = () => {
     const { layoutConfig } = useContext(LayoutContext);
     const menuRef = useRef<HTMLElement | null>(null);
 
-    
     const toggleMenuItemClick = () => {
         setIsHidden((prevState) => !prevState);
     };
