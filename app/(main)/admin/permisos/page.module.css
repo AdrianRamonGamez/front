@@ -1,0 +1,20 @@
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Estado de carga */
+.loading {
+    padding: 20px;
+    text-align: center;
+    color: #6b7280;
+}
+

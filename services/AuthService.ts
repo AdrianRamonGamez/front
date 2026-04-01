@@ -95,6 +95,30 @@ class AuthService {
         const userData = localStorage.getItem('userData');
         return userData ? JSON.parse(userData) : null;
     }
+
+    resetPassword = async (email: string): Promise<{ message: string }> => {
+        try {
+            const response = await fetch(`${BASE_URL}/usuarios/reset-password`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Error al enviar el email');
+            }
+
+            return data;
+
+        } catch (error: any) {
+            console.error('Error en resetPassword:', error);
+            throw error;
+        }
+    };
 }
 
 export default new AuthService();

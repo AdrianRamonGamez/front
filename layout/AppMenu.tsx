@@ -17,11 +17,11 @@ const AppMenu = () => {
                     icon: "pi pi-fw pi-shield",
                     to: "/admin/roles",
                 },
-                /*{
+                {
                     label: "Permisos",
                     icon: "pi pi-fw pi-lock",
                     to: "/admin/permisos",
-                },*/
+                },
             ],
         },
     ];

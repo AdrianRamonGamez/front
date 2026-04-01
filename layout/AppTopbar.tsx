@@ -70,24 +70,13 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
                                 text
                                 rounded
                                 severity="danger"
-                                tooltip="Cerrar sesión"
                                 onClick={handleLogout}
                             />
 
                         </li>
                     )}
 
-                    <li>
-                        <Button
-                            type="button"
-                            icon="pi pi-cog"
-                            text
-                            rounded
-                            severity="secondary"
-                            className="flex-shrink-0"
-                            onClick={onConfigButtonClick}
-                        />
-                    </li>
+                    
 
                 </ul>
             </div>

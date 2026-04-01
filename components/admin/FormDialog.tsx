@@ -46,14 +46,14 @@ export interface FormDialogProps {
 }
 
 const phoneCodes = [
-    { label: '🇪🇸 +34', value: '+34' },
-    { label: '🇬🇧 +44', value: '+44' },
-    { label: '🇫🇷 +33', value: '+33' },
-    { label: '🇩🇪 +49', value: '+49' },
-    { label: '🇮🇹 +39', value: '+39' },
-    { label: '🇲🇽 +52', value: '+52' },
-    { label: '🇦🇷 +54', value: '+54' },
-    { label: '🇨🇱 +56', value: '+56' }
+    { label: '🇪🇸 +34 ', value: '+34' },
+    { label: '🇬🇧 +44 ', value: '+44' },
+    { label: '🇫🇷 +33 ', value: '+33' },
+    { label: '🇩🇪 +49 ', value: '+49' },
+    { label: '🇮🇹 +39 ', value: '+39' },
+    { label: '🇲🇽 +52 ', value: '+52' },
+    { label: '🇦🇷 +54 ', value: '+54' },
+    { label: '🇨🇱 +56 ', value: '+56' }
 ];
 
 export function FormDialog({
@@ -83,7 +83,10 @@ export function FormDialog({
 
         if (data) {
 
-            const processedData = { ...data };
+            //ELIMINAR PASSWORD COMPLETAMENTE
+            const { password, ...rest } = data || {};
+
+            const processedData = { ...rest };
 
             fields.forEach((field) => {
 
@@ -144,7 +147,7 @@ export function FormDialog({
             }
 
         }
-        
+
 
         if (field.type === 'number') {
 
@@ -270,6 +273,7 @@ export function FormDialog({
         const disableField =
             isViewOnly ||
             loading ||
+            field.disabled ||
             (field.name === 'activoSn' && isCurrentUser);
 
         const commonProps = {
@@ -377,7 +381,8 @@ export function FormDialog({
                         disabled={
                             isViewOnly ||
                             loading ||
-                            (field.name === 'activo' && isCurrentUser)
+                            field.disabled || //AÑADIDO
+                            (field.name === 'activoSn' && isCurrentUser) //corregido también
                         }
                         checked={!!value}
                         onChange={(e) => handleFieldChange(field.name, e.value)}

@@ -14,9 +14,10 @@ import UsuarioService, {
 } from '@/services/UsuarioService';
 import RolService, { Rol } from '@/services/RolService';
 import styles from './page.module.css';
+import { Password } from 'primereact/password';
 
 export default function UsuariosPage() {
-
+    const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://[::1]:8000';
     const currentUserId =
         typeof window !== 'undefined'
             ? JSON.parse(localStorage.getItem('userData') || '{}')?.id
@@ -29,13 +30,14 @@ export default function UsuariosPage() {
     const [page, setPage] = useState(1);
     const [rows, setRows] = useState(10);
     const [search, setSearch] = useState('');
-
+    const [permissions, setPermissions] = useState<any>({});
     const [sortBy, setSortBy] = useState('nombre');
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-
+    const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const [selectedUsuario, setSelectedUsuario] = useState<Usuario | null>(null);
     const [isViewOnly, setIsViewOnly] = useState(false);
-
+    const [avatarFile, setAvatarFile] = useState<File | null>(null);
     const [view, setView] = useState<'table' | 'form'>('table');
 
     const toastRef = useRef<Toast>(null);
@@ -118,6 +120,31 @@ export default function UsuariosPage() {
         loadUsuarios();
     }, [page, rows, search, sortBy, sortOrder, filters]);
 
+    useEffect(() => {
+        const loadPermissions = async () => {
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+
+            if (!userData?.rolId) return;
+
+            const res = await fetch(`${BASE_URL}/permisos/por-rol/${userData.rolId}`);
+            const data = await res.json();
+
+            const transformed: any = {};
+
+            for (const modulo in data) {
+                transformed[modulo] = {};
+
+                for (const accion in data[modulo]) {
+                    transformed[modulo][accion] = data[modulo][accion] === true;
+                }
+            }
+
+            setPermissions(data);
+        };
+
+        loadPermissions();
+    }, []);
+
     // =============================
     // CRUD ACTIONS
     // =============================
@@ -185,16 +212,20 @@ export default function UsuariosPage() {
 
                     loadUsuarios();
 
-                } catch (error) {
+                } catch (error: any) {
+
+                    let message = 'Error al eliminar';
+
+                    //Detecta que hay campos relacionados que impiden la eliminación (foreign key)
+                    if (error?.response?.data?.message) {
+                        message = error.response.data.message;
+                    }
 
                     toastRef.current?.show({
                         severity: 'error',
-                        summary: 'Error',
-                        detail:
-                            error instanceof Error
-                                ? error.message
-                                : 'Error al eliminar',
-                        life: 3000,
+                        summary: 'No se puede eliminar',
+                        detail: message,
+                        life: 4000,
                     });
 
                 }
@@ -212,6 +243,38 @@ export default function UsuariosPage() {
 
         try {
 
+            let avatarUrl = selectedUsuario?.avatarUrl;
+
+            // =============================
+            // SUBIR AVATAR SI EXISTE
+            // =============================
+            if (avatarFile) {
+
+                const formDataAvatar = new FormData();
+                formDataAvatar.append('file', avatarFile);
+
+                const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/upload-avatar/${selectedUsuario?.id}`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem('accessToken') || ''}`
+                        },
+                        body: formDataAvatar
+                    }
+                );
+
+                if (!res.ok) {
+                    throw new Error('Error subiendo avatar');
+                }
+
+                const data = await res.json();
+                avatarUrl = data.url; //ajusta si tu backend devuelve otro campo
+            }
+
+            // =============================
+            // UPDATE
+            // =============================
             if (selectedUsuario) {
 
                 const updateData: UpdateUsuarioInput = {
@@ -224,16 +287,19 @@ export default function UsuariosPage() {
                     movil: formData.movil,
                     apellidos: formData.apellidos,
 
+                    //IMPORTANTE
+                    avatarUrl: avatarUrl
                 };
 
-                // 1️⃣ Actualizar usuario SIN password
                 await UsuarioService.updateUsuario(
                     selectedUsuario.id,
                     updateData
                 );
 
-                // 2️⃣ Si hay password → actualizar credenciales aparte
-                if (formData.password) {
+                // PASSWORD
+                const password = formData.password?.trim();
+
+                if (password) {
                     await fetch(`${process.env.NEXT_PUBLIC_API_URL}/usuarioCredenciales/${selectedUsuario.id}`, {
                         method: 'PATCH',
                         headers: {
@@ -241,7 +307,7 @@ export default function UsuariosPage() {
                             Authorization: `Bearer ${localStorage.getItem('accessToken') || ''}`
                         },
                         body: JSON.stringify({
-                            password: formData.password
+                            password: password
                         })
                     });
                 }
@@ -258,14 +324,16 @@ export default function UsuariosPage() {
                 const createData: CreateUsuarioInput = {
 
                     nombre: formData.nombre,
-                    apellidos: formData.apellidos, // NUEVO: guardamos apellido
+                    apellidos: formData.apellidos,
                     mail: formData.mail,
-                    movil: formData.movil, // NUEVO: guardamos móvil
-                    telefono: formData.telefono, // NUEVO: guardamos teléfono
+                    movil: formData.movil,
+                    telefono: formData.telefono,
                     rolId: formData.rolId,
                     password: formData.password,
                     activoSn: formData.activo ? 'S' : 'N',
 
+                    //IMPORTANTE TAMBIÉN AQUÍ
+                    avatarUrl: avatarUrl
                 };
 
                 await UsuarioService.createUsuario(createData);
@@ -279,8 +347,11 @@ export default function UsuariosPage() {
 
             }
 
-            setView('table');
+            //LIMPIAR ESTADO
+            setAvatarFile(null);
+            setAvatarPreview(null);
 
+            setView('table');
             loadUsuarios();
 
         } catch (error) {
@@ -296,7 +367,6 @@ export default function UsuariosPage() {
             });
 
         }
-
     };
 
     // =============================
@@ -347,6 +417,19 @@ export default function UsuariosPage() {
         }
 
         return null;
+    };
+
+    const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setAvatarFile(file);
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            setAvatarPreview(reader.result as string);
+        };
+        reader.readAsDataURL(file);
     };
 
     // =============================
@@ -453,95 +536,136 @@ export default function UsuariosPage() {
 
     ];
 
-    return (
+    if (!permissions?.Usuarios?.Acceder) {
+        return null;
+    }
 
+    return (
         <div className={styles.container}>
 
             <Toast ref={toastRef} />
             <ConfirmDialog />
 
             {view === 'table' && (
+                <>
+                    <CRUDTable<Usuario>
+                        title="Gestión de Usuarios"
+                        data={usuarios}
+                        columns={columns}
+                        loading={loading}
+                        total={total}
+                        page={page}
+                        rows={rows}
+                        sortField={sortBy}
+                        sortOrder={sortOrder}
+                        onPageChange={handlePageChange}
+                        onRowsPerPageChange={handleRowsPerPageChange}
+                        onSearch={handleSearch}
+                        onSort={handleSort}
+                        onNew={handleNew}
+                        onEdit={handleEdit}
+                        onView={handleView}
+                        onDelete={handleDelete}
+                        onDownloadCSV={handleDownloadCSV}
+                        permissions={permissions}
+                        module='Usuarios'
+                    />
 
-                <CRUDTable<Usuario>
-
-                    title="Gestión de Usuarios"
-
-                    data={usuarios}
-
-                    columns={columns}
-
-                    loading={loading}
-
-                    total={total}
-
-                    page={page}
-
-                    rows={rows}
-
-                    sortField={sortBy}
-                    sortOrder={sortOrder}
-
-                    onPageChange={handlePageChange}
-
-                    onRowsPerPageChange={handleRowsPerPageChange}
-
-                    onSearch={handleSearch}
-
-                    onSort={handleSort}
-
-                    onNew={handleNew}
-
-                    onEdit={handleEdit}
-
-                    onView={handleView}
-
-                    onDelete={handleDelete}
-
-                    onDownloadCSV={handleDownloadCSV}
-
-                />
-
+                    <div style={{ marginTop: '1rem', textAlign: 'right' }}>
+                        Usuarios: {total}
+                    </div>
+                </>
             )}
 
             {view === 'form' && (
+                <div>
 
-                <FormDialog
+                    {/* AVATAR */}
+                    <div className={styles.avatarContainer}>
 
-                    inline
+                        <div className={styles.avatarWrapper}>
+                            <img
+                                src={
+                                    avatarPreview ||
+                                    selectedUsuario?.avatarUrl ||
+                                    '/demo/images/avatar/stephenshaw.png'
+                                }
+                                className={styles.avatar}
+                            />
 
-                    visible={true}
+                            {!isViewOnly && (
+                                <input
+                                    type="file"
+                                    ref={fileInputRef}
+                                    style={{ display: 'none' }}
+                                    accept="image/*"
+                                    onChange={handleAvatarChange}
+                                />
+                            )}
+                        </div>
 
-                    title={
-                        selectedUsuario
-                            ? 'Editar Usuario'
-                            : 'Nuevo Usuario'
-                    }
+                        <div className={styles.avatarInfo}>
+                            <Tag
+                                value={
+                                    selectedUsuario?.activoSn === 'S'
+                                        ? 'Activo'
+                                        : 'Inactivo'
+                                }
+                                severity={
+                                    selectedUsuario?.activoSn === 'S'
+                                        ? 'success'
+                                        : 'danger'
+                                }
+                            />
+{/*
+                            {!isViewOnly && (
+                                <button
+                                    className={styles.avatarButton}
+                                    onClick={() => fileInputRef.current?.click()}
+                                >
+                                    Cambiar
+                                </button>
+                            )}*/}
+                        </div>
 
-                    fields={usuarioFields}
+                    </div>
 
-                    data={
-                        selectedUsuario
-                            ? {
-                                ...selectedUsuario,
-                                activo: selectedUsuario.activoSn === 'S',
-                            }
-                            : undefined
-                    }
+                    {/* FORM */}
+                    <FormDialog
+                        inline
+                        key={selectedUsuario?.id || 'new'}
+                        visible={true}
+                        title={
+                            selectedUsuario
+                                ? 'Editar Usuario'
+                                : 'Nuevo Usuario'
+                        }
+                        fields={usuarioFields}
+                        data={
+                            selectedUsuario
+                                ? {
+                                    ...selectedUsuario,
+                                    password: '',
+                                    activo: selectedUsuario.activoSn === 'S',
+                                }
+                                :
+                                {
+                                    password: ''
+                                }}
+                        onHide={() => {
+                            setAvatarPreview(null);
+                            setAvatarFile(null);
+                            setView('table');
+                        }}
+                        onSave={handleSaveUsuario}
+                        isViewOnly={isViewOnly}
+                        loading={loading}
+                    />
 
-                    onHide={() => setView('table')}
-
-                    onSave={handleSaveUsuario}
-
-                    isViewOnly={isViewOnly}
-
-                    loading={loading}
-
-                />
-
+                </div>
             )}
 
         </div>
-
     );
 
 }

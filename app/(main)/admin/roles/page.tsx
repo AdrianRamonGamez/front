@@ -10,24 +10,29 @@ import RolService, { Rol, CreateRolInput, UpdateRolInput } from '@/services/RolS
 import styles from './page.module.css';
 import UsuarioService from '@/services/UsuarioService';
 
-const rolFields: FormField[] = [
-    {
-        name: 'nombre',
-        label: 'Nombre del Rol',
-        type: 'text',
-        required: true,
-        placeholder: 'Ej: Administrador',
-        helperText: 'Máximo 50 caracteres'
-    },
-    {
-        name: 'activoSn',
-        label: 'Estado',
-        type: 'boolean',
-        placeholder: 'Activo',
-    },
-];
+const getRolFields = (rol?: Rol | null) => {
+    return [
+        {
+            name: 'nombre',
+            label: 'Nombre del Rol',
+            type: 'text',
+            required: true,
+            placeholder: 'Ej: Administrador',
+            helperText: 'Máximo 50 caracteres',
+        },
+        {
+            name: 'activoSn',
+            label: 'Estado',
+            type: 'boolean',
+            placeholder: 'Activo',
+            disabled: rol?.nombre === 'Supervisor', //AQUÍ
+        },
+    ];
+};
 
 export default function RolesPage() {
+
+    const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://[::1]:8000';
 
     const isDuplicateRole = (nombre: string, excludeId?: number) => {
         return roles.some((r) => {
@@ -36,14 +41,15 @@ export default function RolesPage() {
             return sameName && isNotCurrent;
         });
     };
+    const [permissions, setPermissions] = useState<any>({});
     const [roles, setRoles] = useState<Rol[]>([]);
     const [loading, setLoading] = useState(true);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [rows, setRows] = useState(10);
     const [search, setSearch] = useState('');
-    const [sortBy, setSortBy] = useState('id');
-    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+    const [sortBy, setSortBy] = useState('nombre');
+    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
     const [filters, setFilters] = useState<Record<string, string>>({});
     const [selectedRol, setSelectedRol] = useState<Rol | null>(null);
     const [isViewOnly, setIsViewOnly] = useState(false);
@@ -59,16 +65,13 @@ export default function RolesPage() {
 
         setLoading(true);
 
+
         try {
 
             const response = await RolService.getRoles(page, rows, search, sortBy, sortOrder, filters);
 
-            const sortedRoles = (response.data || []).sort((a, b) =>
-                a.nombre.localeCompare(b.nombre)
-            );
-
-            setRoles(sortedRoles);
-            setTotal(response.total);
+            setRoles(response.data || []);
+            setTotal(response.total || 0);
 
         } catch (error) {
 
@@ -89,7 +92,26 @@ export default function RolesPage() {
 
     useEffect(() => {
         loadRoles();
+
+
     }, [page, rows, search, sortBy, sortOrder, filters]);
+
+    useEffect(() => {
+        const loadPermissions = async () => {
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+
+            if (!userData?.rolId) return;
+
+            const res = await fetch(`${BASE_URL}/permisos/por-rol/${userData.rolId}`);
+            const data = await res.json();
+
+            const transformed: any = {};
+
+            setPermissions(data);
+        };
+
+        loadPermissions();
+    }, []);
 
     // =============================
     // CRUD ACTIONS
@@ -123,22 +145,33 @@ export default function RolesPage() {
 
     const handleDelete = async (rol: Rol) => {
 
+        //No se puede eliminar el rol Supervisor
+        if (rol.nombre === 'Supervisor') {
+            toastRef.current?.show({
+                severity: 'error',
+                summary: 'Acción no permitida',
+                detail: 'El rol Supervisor no se puede eliminar',
+                life: 4000,
+            });
+            return;
+        }
+
         try {
 
             const count = await UsuarioService.countUsuariosByRol(rol.id);
 
-            // 🚫 BLOQUEAR BORRADO
+            //Bloqueo si tiene usuarios
             if (count > 0) {
                 toastRef.current?.show({
                     severity: 'error',
                     summary: 'Error',
-                    detail: 'No se ha podido eliminar el rol porque está asignado a uno o más usuarios',
+                    detail: 'No se puede eliminar el rol porque está asignado a uno o más usuarios',
                     life: 4000,
                 });
                 return;
             }
 
-            // SOLO SI NO TIENE USUARIOS
+            //Confirmación y eliminación
             confirmDialog({
                 message: `¿Seguro que deseas eliminar el rol "${rol.nombre}"?`,
                 header: 'Confirmar eliminación',
@@ -161,16 +194,13 @@ export default function RolesPage() {
             });
 
         } catch {
-
             toastRef.current?.show({
                 severity: 'error',
                 summary: 'Error',
                 detail: 'No se pudo verificar el rol',
                 life: 3000,
             });
-
         }
-
     };
 
     // =============================
@@ -384,6 +414,10 @@ export default function RolesPage() {
         setRows(event.rows);
     };
 
+    if (!permissions?.Roles?.Acceder) {
+        return null;
+    }
+
     return (
 
         <div className={styles.container}>
@@ -392,69 +426,54 @@ export default function RolesPage() {
             <ConfirmDialog />
 
             {view === 'table' && (
-
-                <CRUDTable<Rol>
-
-                    title="Gestión de Roles"
-
-                    data={roles}
-
-                    columns={columns}
-
-                    loading={loading}
-
-                    total={total}
-
-                    page={page}
-
-                    rows={rows}
-
-                    onPageChange={handlePageChange}
-
-                    onRowsPerPageChange={(r) => {
-
-                        setRows(r);
-                        setPage(1);
-
-                    }}
-
-                    onSearch={(params: { global: string; filters: Record<string, string> }) => {
-                        setSearch(params.global);
-                        setFilters(params.filters); // 🔥 ESTA LÍNEA ES LA CLAVE
-                        setPage(1);
-                    }}
-
-                    onSort={(field, order) => {
-
-                        if (!field || !order) {
-
-                            setSortBy('id');
-                            setSortOrder('desc');
+                <>
+                    <CRUDTable<Rol>
+                        title="Gestión de Roles"
+                        data={roles}
+                        columns={columns}
+                        loading={loading}
+                        total={total}
+                        page={page}
+                        rows={rows}
+                        permissions={permissions}
+                        onPageChange={handlePageChange}
+                        onRowsPerPageChange={(r) => {
+                            setRows(r);
                             setPage(1);
+                        }}
+                        onSearch={(params: { global: string; filters: Record<string, string> }) => {
+                            setSearch(params.global);
+                            setFilters(params.filters);
+                            setPage(1);
+                        }}
+                        onSort={(field, order) => {
+                            if (!field || !order) {
+                                setSortBy('id');
+                                setSortOrder('desc');
+                                setPage(1);
+                                return;
+                            }
 
-                            return;
-                        }
+                            setSortBy(field);
+                            setSortOrder(order);
+                            setPage(1);
+                        }}
+                        sortField={sortBy}
+                        sortOrder={sortOrder}
+                        onNew={handleNew}
+                        onEdit={handleEdit}
+                        onView={handleView}
+                        onDelete={handleDelete}
+                        onDownloadCSV={handleDownloadCSV}
+                        searchPlaceholder="Buscar por nombre..."
+                        module="Roles"
+                    />
 
-                        setSortBy(field);
-                        setSortOrder(order);
-                        setPage(1);
-
-                    }}
-
-                    onNew={handleNew}
-
-                    onEdit={handleEdit}
-
-                    onView={handleView}
-
-                    onDelete={handleDelete}
-
-                    onDownloadCSV={handleDownloadCSV}
-
-                    searchPlaceholder="Buscar por nombre..."
-
-                />
-
+                    {/*Muestra el total de roles debajo de la tabla*/}
+                    <div style={{ marginTop: '1rem', fontWeight: 500, textAlign: 'right' }}>
+                        Roles: {total}
+                    </div>
+                </>
             )}
 
             {view === 'form' && (
@@ -473,7 +492,7 @@ export default function RolesPage() {
                                 : 'Nuevo Rol'
                     }
 
-                    fields={rolFields}
+                    fields={getRolFields(selectedRol || undefined) as FormField[]}
 
                     data={selectedRol || undefined}
 

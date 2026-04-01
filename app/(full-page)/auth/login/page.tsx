@@ -137,28 +137,7 @@ const Login: Page = () => {
                                 disabled={loading}
                             />
                         </span>
-                        <div className="mb-4 flex flex-wrap gap-3">
-                            <div>
-                                <Checkbox
-                                    name="checkbox"
-                                    checked={rememberMe}
-                                    onChange={(e) =>
-                                        setRememberMe(e.checked ?? false)
-                                    }
-                                    disabled={loading}
-                                    className="mr-2"
-                                ></Checkbox>
-                                <label
-                                    htmlFor="checkbox"
-                                    className="text-900 font-medium mr-8"
-                                >
-                                    Recuerdame
-                                </label>
-                            </div>
-                            <a className="text-600 cursor-pointer hover:text-primary cursor-pointer ml-auto transition-colors transition-duration-300">
-                                Reestablecer contraseña
-                            </a>
-                        </div>
+                        
                         <Button
                             type="submit"
                             label={loading ? "Iniciar sesión" : "Iniciar sesión"}

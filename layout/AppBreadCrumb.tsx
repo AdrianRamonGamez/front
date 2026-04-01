@@ -37,7 +37,7 @@ const AppBreadcrumb = (props: AppBreadcrumbProps) => {
                     ) : (
                         <>
                             {pathname === "/" && (
-                                <li key={"home"}>E-Commerce Dashboard</li>
+                                <li key={"home"}>Página Principal</li>
                             )}
                             {pathname === "/dashboard-banking" && (
                                 <li key={"banking"}>Banking Dashboard</li>

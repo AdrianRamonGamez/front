@@ -24,4 +24,30 @@
     display: inline-block;
 }
 
+.avatarContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
+.avatarWrapper {
+    position: relative;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatarInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.avatarButton {
+    font-size: 0.8rem;
+    cursor: pointer;
+}

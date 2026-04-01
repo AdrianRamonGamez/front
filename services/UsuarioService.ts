@@ -14,6 +14,7 @@ export interface Usuario {
     telefono?: string; // NUEVO: teléfono opcional
     apellidos?: string; // NUEVO: apellido opcional
     movil?: string; // NUEVO: móvil opcional
+    avatarUrl?: string; // NUEVO: URL del avatar opcional
 }
 
 export interface UsuarioResponse {
@@ -32,6 +33,7 @@ export interface CreateUsuarioInput {
     password: string;
     activoSn: 'S' | 'N';
     telefono?: string; // NUEVO: teléfono opcional
+    avatarUrl?: string; // NUEVO: URL del avatar opcional
 }
 
 export interface UpdateUsuarioInput {
@@ -43,6 +45,7 @@ export interface UpdateUsuarioInput {
     password?: string;
     activoSn?: 'S' | 'N';
     telefono?: string; // NUEVO: teléfono opcional
+    avatarUrl?: string; // NUEVO: URL del avatar opcional
 }
 
 function getAuthHeaders(): HeadersInit {
