@@ -3,17 +3,21 @@ import { RolControllerApi, settings, PermisoControllerApi } from "@/app/api-prog
 const apiRol = new RolControllerApi(settings)
 const apiPermisos = new PermisoControllerApi(settings)
 
-export const obtenerRol = async (filtro) => {
-    const { data: dataRoles } = await apiRol.rolControllerFind(
-        filtro?.page,
-        filtro?.limit,
-        filtro?.search,
-        filtro?.sortBy,
-        filtro?.sortOrder,
-        filtro?.filters
-    )
-    return dataRoles
-}
+export const obtenerRol = async (filtro = {}) => {
+    const response = await apiRol.rolControllerFind(
+        filtro.page || 1,
+        filtro.limit || 10,
+        filtro.search || '',
+        filtro.sortBy,
+        filtro.sortOrder,
+        filtro.filters || {}
+    );
+
+    return {
+        data: response?.data?.data || [],
+        total: response?.data?.total || 0
+    };
+};
 
 export const obtenerCuentaRol = async (filtro) => {
     const { data: dataRoles } = await apiRol.rolControllerCount(filtro)
@@ -26,7 +30,7 @@ export const postRol = async (objRol) => {
 }
 
 export const patchRol = async (idRol, objRol) => {
-    const { data: dataRol } = await apiRol.rolControllerUpdateById(idRol, objRol)   
+    const { data: dataRol } = await apiRol.rolControllerUpdateById(idRol, objRol)
     return dataRol
 }
 
@@ -44,19 +48,18 @@ export const buscaPermisosExistente = async (idRol) => {
 
 export const obtenerRolDashboard = async () => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
-    if(usuario){
+    if (usuario) {
         const filtro = {
             filters: {
                 id: usuario.rolId
             }
         };
 
-        const rol = await getRol(filtro);
+        const rol = await obtenerRol(filtro);
 
-        return (rol && rol.data && rol.data.length > 0) 
-            ? (rol.data[0].dashboardUrl || '/') 
+        return (rol && rol.data && rol.data.length > 0)
+            ? (rol.data[0].dashboardUrl || '/')
             : '/';
     }
     return '/';
 }
-

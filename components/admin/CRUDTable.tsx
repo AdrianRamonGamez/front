@@ -89,7 +89,8 @@ export function CRUDTable<T extends { id?: number | string }>({
             : 1; const [columnFilters, setColumnFilters] = useState<Record<string, string>>({});
     const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
-    const currentUserId =
+    // Funcion que detecta el id del usuario actual si está en el navegado, si no se encuentra o no hay entorno
+    const usuarioActual =
         typeof window !== 'undefined'
             ? JSON.parse(localStorage.getItem('userData') || '{}')?.id
             : null;
@@ -168,7 +169,7 @@ export function CRUDTable<T extends { id?: number | string }>({
             filters: {}
         });
 
-        //FORZAR ORDEN ALFABÉTICO
+        //Forzar orden alfabético de mayor a menor
         if (onSort) onSort('nombre', 'asc');
     };
 
@@ -182,11 +183,12 @@ export function CRUDTable<T extends { id?: number | string }>({
         onSort?.(field, order);
     };
 
-    // =============================
-    // TOOLBAR
-    // =============================
-    const leftToolbarTemplate = () => (
-    <>
+    // Botones crear y descargarCSV del toppbar
+    const botonesTop = () => (
+        <>
+
+            {/*
+        //En el futuro añadir esta logica para la pantalla de permisos
         {permissions?.[module]?.Nuevo === true && (
             <Button
                 label="Nuevo"
@@ -195,24 +197,30 @@ export function CRUDTable<T extends { id?: number | string }>({
                 onClick={onNew}
                 className="mr-2"
             />
-        )}
+        )}*/}
 
-        <Button
-            label="Exportar CSV"
-            icon="pi pi-download"
-            onClick={() => setShowCsvDialog(true)}
-        />
-    </>
-);
+            <Button
+                label="Nuevo"
+                icon="pi pi-plus"
+                severity="success"
+                onClick={onNew}
+                className="mr-2"
+            />
+
+            <Button
+                label="Exportar CSV"
+                icon="pi pi-download"
+                onClick={() => setShowCsvDialog(true)}
+            />
+        </>
+    );
 
     const rightToolbarTemplate = () => (
         <Button label="Limpiar Filtros" icon="pi pi-times" severity="danger" onClick={handleClearFilters} />
     );
 
-    // =============================
-    // ACTIONS
-    // =============================
-    const actionsTemplate = (row: T) => {
+    // En un futuro implememntar esta lógica para la pantalla de permisos, que no se vean ciertos botones para el usario que no tenga los permisos necesarios para verlos
+    /*const actionsTemplate = (row: T) => {
 
         const isCurrentUser = row.id === currentUserId;
 
@@ -239,6 +247,47 @@ export function CRUDTable<T extends { id?: number | string }>({
                 </div>
             </div>
         );
+    };*/
+
+    // Visualizar los botones  
+    const accionBotones = (row: T) => {
+
+        const isCurrentUser = row.id === usuarioActual;
+
+        return (
+            <div className={styles.cellWithActions}>
+                <div className={styles.actions}>
+
+                    {onView && (
+                        <Button
+                            icon="pi pi-eye"
+                            severity="info"
+                            onClick={() => onView(row)}
+                            className="p-button-sm p-button-rounded"
+                        />
+                    )}
+
+                    {onEdit && (
+                        <Button
+                            icon="pi pi-pencil"
+                            severity="success"
+                            onClick={() => onEdit(row)}
+                            className="p-button-sm p-button-rounded"
+                        />
+                    )}
+
+                    {onDelete && !isCurrentUser && (
+                        <Button
+                            icon="pi pi-trash"
+                            severity="warning"
+                            onClick={() => handleDelete(row)}
+                            className="p-button-sm p-button-rounded"
+                        />
+                    )}
+
+                </div>
+            </div>
+        );
     };
 
     return (
@@ -250,7 +299,7 @@ export function CRUDTable<T extends { id?: number | string }>({
                 <h1>{title}</h1>
             </div>
 
-            <Toolbar left={leftToolbarTemplate} right={rightToolbarTemplate} className={styles.toolbar} />
+            <Toolbar left={botonesTop} right={rightToolbarTemplate} className={styles.toolbar} />
 
             <div className={styles.searchContainer}>
                 <InputText
@@ -331,7 +380,7 @@ export function CRUDTable<T extends { id?: number | string }>({
 
                     <Column
                         header="Acciones"
-                        body={(rowData) => actionsTemplate(rowData)}
+                        body={(rowData) => accionBotones(rowData)}
                         style={{ width: '200px' }}
                         exportable={false}
                     />

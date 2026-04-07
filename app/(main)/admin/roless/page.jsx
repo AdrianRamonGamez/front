@@ -1,7 +1,7 @@
 "use client";
 
 import { useIntl } from "react-intl";
-import { getRol, getRolCount, deleteRol } from "@/app/api-endpoints/roles";
+import { obtenerRol, obtenerCuentaRol, deleteRol } from "@/app/api-endpoints/roles";
 import EditarRoles from "./editar";
 import { CRUDTable } from '@/components/admin/CRUDTable';
 
@@ -10,19 +10,21 @@ const Rol = () => {
 
     const columnas = [
         {
-            campo: 'nombre',
+
+            field: 'nombre',
             header: intl.formatMessage({ id: 'Nombre' }),
-            tipo: 'string'
+            type: 'string'
         },
         {
-            campo: 'dashboardUrl',
+            visible: false,
+            field: 'dashboardUrl',
             header: intl.formatMessage({ id: 'Página inicio' }),
-            tipo: 'string'
+            type: 'string'
         },
         {
-            campo: 'activoSn',
-            header: intl.formatMessage({ id: 'Activo' }),
-            tipo: 'booleano'
+            field: 'activoSn',
+            header: intl.formatMessage({ id: 'Estado' }),
+            type: 'string'
         },
     ];
 
@@ -30,12 +32,12 @@ const Rol = () => {
         <div>
             <CRUDTable
                 headerCrud={intl.formatMessage({ id: 'Roles' })}
-                getRegistros={getRol}
-                getRegistrosCount={getRolCount}
-                botones={['nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
+                getRegistros={obtenerRol}
+                getRegistrosCount={obtenerCuentaRol}
+                botones={['Nuevo', 'ver', 'editar', 'eliminar', 'descargarCSV']}
                 controlador={"Roles"}
                 editarComponente={<EditarRoles />}
-                columnas={columnas}
+                columns={columnas}
                 deleteRegistro={deleteRol}
             />
         </div>

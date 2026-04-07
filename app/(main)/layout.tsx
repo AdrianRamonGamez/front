@@ -5,6 +5,7 @@ import Layout from "../../layout/layout";
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AuthService from '@/services/AuthService';
+import IntlProviderWrapper from '@/app/utility/Traducciones.js';
 
 interface MainLayoutProps {
     children: React.ReactNode;
@@ -43,8 +44,10 @@ export default function MainLayout({ children }: MainLayoutProps) {
     }, []);
 
     return (
-        <Layout>
-            {children}
-        </Layout>
+        <IntlProviderWrapper>
+            <Layout>
+                {children}
+            </Layout>
+        </IntlProviderWrapper>
     );
 }
